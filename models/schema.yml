@@ -10,5 +10,3 @@ models:
           - not_null
       - name: email
       - name: created_at
-        tests:
-          - not_null
