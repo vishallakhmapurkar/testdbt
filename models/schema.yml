@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Active customers staging model."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        data_tests:
+          - not_null
+          - unique
+      - name: email
+        description: "Customer email address."
+        data_tests:
+          - not_null
