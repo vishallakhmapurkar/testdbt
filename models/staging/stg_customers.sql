@@ -1,19 +1,11 @@
-{{
-  config(
-    materialized = 'view'
-  )
-}}
+{{ config(materialized='view') }}
 
 with raw_customers as (
-    select 1 as customer_id, 'alice@example.com' as email, timestamp('2024-01-01') as created_at, false as is_deleted
-    union all
-    select 2 as customer_id, 'bob@example.com' as email, timestamp('2024-01-02') as created_at, false as is_deleted
-    union all
-    select 3 as customer_id, 'deleted@example.com' as email, timestamp('2024-01-03') as created_at, true as is_deleted
+    select * from {{ source('raw', 'customers') }}
 )
 
 select
     customer_id,
-    email
+    email,
+    SAFE_CAST(created_at AS TIMESTAMP) AS created_at
 from raw_customers
-where is_deleted = false
