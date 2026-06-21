@@ -1,15 +1,15 @@
 {{ config(materialized='view') }}
 
-WITH source AS (
-    SELECT * FROM {{ source('staging', 'raw_customers') }}
-),
-
-renamed AS (
-    SELECT
+with raw_customers as (
+    select
         customer_id,
         email,
         created_at
-    FROM source
+    from {{ source('raw', 'customers') }}
 )
 
-SELECT * FROM renamed
+select
+    customer_id,
+    email,
+    created_at
+from raw_customers
