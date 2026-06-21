@@ -1,11 +1,15 @@
 {{ config(materialized='view') }}
 
-with raw_customers as (
-    select * from {{ source('raw', 'customers') }}
+WITH source AS (
+    SELECT * FROM {{ source('staging', 'raw_customers') }}
+),
+
+renamed AS (
+    SELECT
+        customer_id,
+        email,
+        created_at
+    FROM source
 )
 
-select
-    customer_id,
-    email,
-    SAFE_CAST(created_at AS TIMESTAMP) AS created_at
-from raw_customers
+SELECT * FROM renamed
