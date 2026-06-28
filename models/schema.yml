@@ -2,12 +2,12 @@ version: 2
 
 models:
   - name: stg_customers
-    description: "Staged customer data"
+    description: Active customers.
     columns:
       - name: customer_id
         tests:
-          - unique
           - not_null
-      - name: created_at
+          - unique
+      - name: email
         tests:
           - not_null
