@@ -1,0 +1,4 @@
+customer_id,email,is_deleted
+1,alice@example.com,false
+2,bob@example.com,false
+3,deleted@example.com,true
