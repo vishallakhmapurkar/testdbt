@@ -1,9 +1,9 @@
 ### Validation Report
-
-- **Model**: `stg_customers`
-- **Status**: Passed
-- **Details**:
-    - Materialization: Confirmed as `view`, matching technical design.
-    - Tests: `unique` and `not_null` configured for `customer_id`, `not_null` for `email` and `created_at` as per design.
-    - SQL Structure: Correctly filters `is_deleted = false` and uses `{{ ref() }}` macro for source.
-    - No fix requests needed.
+- **Model:** `mart_customer_order_summary`
+- **Materialization:** Validated. SQL uses `{{ config(materialized='view') }}` as requested.
+- **Column Integrity:** All columns defined in the technical design are present in the SQL model.
+- **Tests:**
+    - `latest_order_date` includes `not_null`.
+    - `is_high_value_customer` includes `accepted_values` (boolean).
+    - Added standard `unique` and `not_null` tests for the primary key (`customer_id`).
+- **Logic Check:** Logic aligns with the design transformation rules.
