@@ -1,7 +1,8 @@
 {{ config(materialized='view') }}
 
-select
+SELECT
     customer_id,
-    email
-from {{ ref('raw_customers') }}
-where is_deleted = false
+    email,
+    created_at
+FROM {{ ref('raw_customers') }}
+WHERE is_deleted = false
