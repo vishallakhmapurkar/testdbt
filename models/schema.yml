@@ -1,19 +1,32 @@
 version: 2
 
 models:
-  - name: stg_customers
-    description: "Staging model for active customers"
+  - name: mart_customer_order_summary
+    description: "Aggregated customer order summary providing metrics on order count, total net amount, and order recency."
     columns:
       - name: customer_id
-        description: "Unique identifier for a customer"
-        data_tests:
+        description: "Unique identifier for the customer"
+        tests:
           - unique
           - not_null
       - name: email
-        description: "Email address of the customer"
-        data_tests:
+        description: "Customer email address"
+      - name: order_count
+        description: "Total number of orders placed by the customer"
+      - name: total_net_amount
+        description: "Total sum of net order amounts"
+      - name: first_order_ts
+        description: "Timestamp of the customer's first order"
+      - name: latest_order_ts
+        description: "Timestamp of the customer's most recent order"
+      - name: latest_order_date
+        description: "Date portion of the latest order timestamp"
+        tests:
           - not_null
-      - name: created_at
-        description: "Timestamp when the customer record was created"
-        data_tests:
-          - not_null
+      - name: days_since_latest_order
+        description: "Number of days elapsed since the latest order"
+      - name: is_high_value_customer
+        description: "Flag indicating if the customer's total net amount is >= 1000"
+        tests:
+          - accepted_values:
+              values: [true, false]
