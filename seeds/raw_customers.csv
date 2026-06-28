@@ -1,0 +1,4 @@
+customer_id,email,created_at,is_deleted
+1,alice@example.com,2024-01-01 10:00:00,false
+2,bob@example.com,2024-01-02 11:30:00,false
+3,deleted@example.com,2024-01-03 09:15:00,true
