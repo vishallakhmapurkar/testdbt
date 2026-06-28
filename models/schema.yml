@@ -2,12 +2,18 @@ version: 2
 
 models:
   - name: stg_customers
-    description: Active customers.
+    description: "Staging model for active customers"
     columns:
       - name: customer_id
-        tests:
-          - not_null
+        description: "Unique identifier for a customer"
+        data_tests:
           - unique
+          - not_null
       - name: email
-        tests:
+        description: "Email address of the customer"
+        data_tests:
+          - not_null
+      - name: created_at
+        description: "Timestamp when the customer record was created"
+        data_tests:
           - not_null
