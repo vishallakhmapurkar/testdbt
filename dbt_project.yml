@@ -15,3 +15,5 @@ models:
   testdbt:
     staging:
       +materialized: view
+    marts:
+      +materialized: view  

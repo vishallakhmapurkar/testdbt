@@ -1,0 +1,5 @@
+order_id,customer_id,order_ts,status,gross_amount,discount_amount
+1001,1,2024-01-10 10:00:00,completed,500,0
+1002,1,2024-01-20 11:00:00,completed,750,50
+1003,2,2024-02-01 09:30:00,cancelled,200,0
+1004,2,2024-02-15 12:00:00,completed,300,25
