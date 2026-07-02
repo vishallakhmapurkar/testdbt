@@ -4,5 +4,5 @@ SELECT
     customer_id,
     email,
     created_at
-FROM {{ ref('raw_customers') }}
+FROM {{ source('raw_crm', 'customers') }}
 WHERE is_deleted = false

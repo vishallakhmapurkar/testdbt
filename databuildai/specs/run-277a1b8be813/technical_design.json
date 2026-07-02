@@ -1,0 +1,63 @@
+{
+  "status": "ready",
+  "target_warehouse": "BigQuery",
+  "output_scope": "models_and_tests_only",
+  "models": [
+    {
+      "name": "stg_customers",
+      "file_name": "staging/stg_customers.sql",
+      "model_description": "Staging model for active customers",
+      "materialization": "view",
+      "depends_on": [
+        "source.raw_crm.customers"
+      ],
+      "grain": "One row per customer (customer_id)",
+      "primary_key": "customer_id",
+      "columns": [
+        "customer_id",
+        "email",
+        "created_at"
+      ],
+      "column_descriptions": {
+        "customer_id": "Unique identifier for a customer",
+        "email": "Email address of the customer",
+        "created_at": "Timestamp when the customer record was created"
+      },
+      "source_expression": "{{ source('raw_crm', 'customers') }}",
+      "existing_sql_pattern": "",
+      "sql_strategy": [
+        "SELECT customer_id, email, created_at FROM {{ source('raw_crm', 'customers') }} WHERE is_deleted = false"
+      ],
+      "tests": [
+        {
+          "column": "customer_id",
+          "tests": [
+            "not_null",
+            "unique"
+          ]
+        },
+        {
+          "column": "email",
+          "tests": [
+            "not_null"
+          ]
+        },
+        {
+          "column": "created_at",
+          "tests": [
+            "not_null"
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "customers",
+      "source_name": "raw_crm",
+      "unique_id": "source.raw_crm.customers"
+    }
+  ],
+  "missing_information": [],
+  "assumption_policy": "strictly_from_input"
+}

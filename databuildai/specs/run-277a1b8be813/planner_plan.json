@@ -1,0 +1,26 @@
+{
+  "task_type": "new_model",
+  "target_models": [
+    "stg_customers"
+  ],
+  "required_skills": [
+    "using-dbt-for-analytics-engineering"
+  ],
+  "required_skill_references": [
+    "references/planning-dbt-models.md",
+    "references/writing-data-tests.md"
+  ],
+  "required_dbt_mcp_tools": [
+    "search",
+    "get_model_details",
+    "get_lineage",
+    "get_model_children",
+    "get_all_sources",
+    "get_source_details",
+    "get_all_models",
+    "get_related_models"
+  ],
+  "risk_level": "low",
+  "requires_user_confirmation": false,
+  "reason": "Creating a new staging model based on a clearly defined source and requirement. No impact on existing models."
+}

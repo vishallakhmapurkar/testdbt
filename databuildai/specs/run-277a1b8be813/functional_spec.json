@@ -1,0 +1,64 @@
+{
+  "status": "draft",
+  "warehouse": "BigQuery",
+  "source_requirement_path": "workspace/input/local_01_single_model_no_missing.md",
+  "sources": [
+    {
+      "name": "customers",
+      "source_name": "raw_crm",
+      "unique_id": "source.raw_crm.customers"
+    }
+  ],
+  "target_models": [
+    {
+      "name": "stg_customers",
+      "file_path": "models/staging/stg_customers.sql",
+      "materialization": "view",
+      "description": "Staging model for active customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "description": "Unique identifier for a customer"
+        },
+        {
+          "name": "email",
+          "description": "Email address of the customer"
+        },
+        {
+          "name": "created_at",
+          "description": "Timestamp when the customer record was created"
+        }
+      ]
+    }
+  ],
+  "transformation_rules": [
+    {
+      "rule_id": "filter_active_customers",
+      "description": "Filter raw source data to include only active customers where is_deleted is false.",
+      "logic": "WHERE is_deleted = false"
+    }
+  ],
+  "data_quality_rules": [
+    {
+      "column": "customer_id",
+      "tests": [
+        "not_null",
+        "unique"
+      ]
+    },
+    {
+      "column": "email",
+      "tests": [
+        "not_null"
+      ]
+    },
+    {
+      "column": "created_at",
+      "tests": [
+        "not_null"
+      ]
+    }
+  ],
+  "missing_information": [],
+  "assumption_policy": "strictly_from_input"
+}
